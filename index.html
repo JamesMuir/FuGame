@@ -1,0 +1,71 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Phaser - Making your first game, part 1</title>
+	<script type="text/javascript" src="js/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var game = new Phaser.Game(960, 640, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+function preload() {
+    game.load.image('platLeftOne', 'assets/MetalPlatformOneLeft.png');
+    game.load.image('platRightOne', 'assets/MetalPlatformOneRight.png');
+    game.load.image('platCenterOne', 'assets/MetalPlatformOneCenter.png');
+    game.load.image('platBaseOne', 'assets/MetalPlatformOneBase.png');
+    game.load.image('background', 'assets/Background.png');
+    game.load.spritesheet('player', 'assets/playerSprite.png', 32, 64);
+}
+    
+var platforms;
+
+function create() {
+    // Sets physics mode
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    
+    // Sets background 
+    game.add.sprite(0, 0, 'background');
+    
+    // Adds platforms that contain the ground and ledges
+    platforms = game.add.group();
+    
+    // Enables physics for anything in the platform group
+    platforms.enableBody = true;
+    
+    //Creates the base 
+    var base = platforms.create(0, 576, 'platBaseOne');
+    
+    //Stops the base from falling when jumped on
+    base.body.immovable = true;
+        
+    //Adds the ledges 
+    //TODO
+    
+    //Adds player
+    player = game.add.sprite(32, game.world.height - 150, 'player');
+    
+    game.physics.arcade.enable(player);
+    
+    player.body.bounce.y = 0.2;
+    player.body.gravity.y = 300;
+    player.body.collideWorldBounds = true;
+    
+    player.animations.add('left', [0, 1], 10, true);
+    player.animations.add('right', [3,4], 10, true);
+}
+
+function update() {
+}
+
+</script>
+
+</body>
+</html>
