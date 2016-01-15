@@ -2,7 +2,7 @@
 <html lang="en"> 
 <head> 
 	<meta charset="UTF-8" />
-	<title>Phaser - Making your first game, part 1</title>
+	<title>Phaser Test One - James Muir</title>
 	<script type="text/javascript" src="js/phaser.min.js"></script>
     <style type="text/css">
         body {
@@ -48,21 +48,27 @@ function create() {
     base.body.immovable = true;
         
     // Adds the Ledges 
-    var ledge = platforms.create(288, 480, 'platLeftOne');
+    // Ledge One
+    var ledge = platforms.create(256, 480, 'platLeftOne');
     ledge.body.immovable = true;
+     var ledge = platforms.create(288, 480, 'platCenterOne');
+    ledge.body.immovable = true;
+    
     var ledge = platforms.create(320, 480, 'platCenterOne');
-    ledge.body.immovable = true;
     var ledge = platforms.create(352, 480, 'platCenterOne');
+    
     var ledge = platforms.create(384, 480, 'platCenterOne');
     ledge.body.immovable = true;
     var ledge = platforms.create(416, 480, 'platRightOne');
     ledge.body.immovable = true;
     
+    // Ledge Two
     var ledge = platforms.create(288, 256, 'platLeftOne');
     ledge.body.immovable = true;
+    
     var ledge = platforms.create(320, 256, 'platCenterOne');
-    ledge.body.immovable = true;
     var ledge = platforms.create(352, 256, 'platCenterOne');
+    
     var ledge = platforms.create(384, 256, 'platCenterOne');
     ledge.body.immovable = true;
     var ledge = platforms.create(416, 256, 'platRightOne');
@@ -74,11 +80,11 @@ function create() {
     game.physics.arcade.enable(player);
     
     player.body.bounce.y = 0.2;
-    player.body.gravity.y = 400;
+    player.body.gravity.y = 350;
     player.body.collideWorldBounds = true;
     
-    player.animations.add('left', [0, 1, 2, 3], 10, true);
-    player.animations.add('right', [5, 6, 7, 8], 10, true);
+    player.animations.add('left', [0, 1, 2, 3], 20, true);
+    player.animations.add('right', [5, 6, 7, 8], 20, true);
     
     cursors = game.input.keyboard.createCursorKeys();
 }
