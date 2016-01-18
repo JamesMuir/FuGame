@@ -23,6 +23,7 @@
         var map;
         var layer;
         var player;
+        var jumpButton;
         
         function create() {
             game.stage.backgroundColor = '#787878';
@@ -30,7 +31,7 @@
             map.addTilesetImage('tilesetMkI', 'tileset');   
             
             //Sets collisions
-            map.setCollisionBetween(0, 6);
+            map.setCollisionBetween(0, 4);
             
             layer = map.createLayer('Tile Layer 1');
             layer.resizeWorld();
@@ -38,16 +39,22 @@
             //Adds player
             player = game.add.sprite(32, game.world.height - 150, 'player');
 
-            game.physics.arcade.enable(player);
+            game.physics.enable(player);
 
             player.body.bounce.y = 0.2;
-            player.body.gravity.y = 350;
+            player.body.gravity.y = 150;
             player.body.collideWorldBounds = true;
 
             player.animations.add('left', [0, 1, 2, 3], 20, true);
             player.animations.add('right', [5, 6, 7, 8], 20, true);
+            game.camera.follow(player);
 
             cursors = game.input.keyboard.createCursorKeys();
+            jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+            w = game.input.keyboard.addKey(Phaser.Keyboard.W);
+            a = game.input.keyboard.addKey(Phaser.Keyboard.A);
+            s = game.input.keyboard.addKey(Phaser.Keyboard.S);
+            d = game.input.keyboard.addKey(Phaser.Keyboard.D);
         }
     
         function update() {
@@ -72,9 +79,11 @@
 
                 player.frame = 4;
             }
-                if (cursors.up.isDown && player.body.touching.down)
+            if (jumpButton.isDown)
             {
-                player.body.velocity.y = -350;
+                console.log("Up pressed")
+                if (player.body.onFloor())
+                    player.body.velocity.y = -170;
             }
         }
         
