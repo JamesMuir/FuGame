@@ -18,6 +18,8 @@
             game.load.tilemap('tilemap', 'assets/testMapTwo.json', null, Phaser.Tilemap.TILED_JSON)
             game.load.image('tileset', 'assets/tilesetMkI.png');
             game.load.spritesheet('player', 'assets/playerSpriteTwo.png', 32, 64);
+            game.load.image('spikes' ,'assets/spikes.png');
+            game.load.physics('spikes_physics' ,'assets/spikes.json');
         }
         
         var map;
