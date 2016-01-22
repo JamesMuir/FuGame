@@ -14,80 +14,36 @@
     <script type="text/javascript">
         var game = new Phaser.Game(960, 640, Phaser.AUTO, '', { preload: preload, create: create, update: update });
         
-        function preload() {
-            game.load.tilemap('tilemap', 'assets/testMapTwo.json', null, Phaser.Tilemap.TILED_JSON)
-            game.load.image('tileset', 'assets/tilesetMkI.png');
-            game.load.spritesheet('player', 'assets/playerSpriteTwo.png', 32, 64);
-            game.load.image('spikes' ,'assets/spikes.png');
-            game.load.physics('spikes_physics' ,'assets/spikes.json');
+        function preload(){
+            game.load.image("spikes", "assets/spikes.png");
+            game.load.physics("spikes_physics", "assets/spikes.json")
         }
         
-        var map;
-        var layer;
-        var player;
-        var jumpButton;
-        
-        function create() {
+        function create(){
+            
+            //Sets background colour 
             game.stage.backgroundColor = '#787878';
-            map = game.add.tilemap('tilemap');
-            map.addTilesetImage('tilesetMkI', 'tileset');   
             
-            //Sets collisions
-            map.setCollisionBetween(0, 4);
+            //Sets physics system
+            game.physics.startSystem(Phaser.Physics.PSJS);
             
-            layer = map.createLayer('Tile Layer 1');
-            layer.resizeWorld();
+            // Gravity set
+            //game.physics.p2.gravity.y = 1000;
                         
-            //Adds player
-            player = game.add.sprite(32, game.world.height - 150, 'player');
-
-            game.physics.enable(player);
-
-            player.body.bounce.y = 0.2;
-            player.body.gravity.y = 150;
-            player.body.collideWorldBounds = true;
-
-            player.animations.add('left', [0, 1, 2, 3], 20, true);
-            player.animations.add('right', [5, 6, 7, 8], 20, true);
-            game.camera.follow(player);
-
-            cursors = game.input.keyboard.createCursorKeys();
-            jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-            w = game.input.keyboard.addKey(Phaser.Keyboard.W);
-            a = game.input.keyboard.addKey(Phaser.Keyboard.A);
-            //s = game.input.keyboard.addKey(Phaser.Keyboard.S);
-            d = game.input.keyboard.addKey(Phaser.Keyboard.D);
+            // Create spiles
+            spikes = game.add.sprite(200,400, "spikes");
+            
+            game.physics.p2.enable(spikes, true);
+            
+            spikes.body.clearShapes();
+            
+            spikes.body.loadPolygon("spikes_physics", "spiles");
         }
-    
-        function update() {
-            game.physics.arcade.collide(player, layer);
-    
-            player.body.velocity.x = 0;
-
-            if (cursors.left.isDown || a.isDown){
-                player.body.velocity.x = -150;
-
-                player.animations.play('left');
-            }
-            else if (cursors.right.isDown || d.isDown)
-            {
-                player.body.velocity.x = 150;
-
-                player.animations.play('right');
-            }
-            else
-            {
-                player.animations.stop();
-
-                player.frame = 4;
-            }
-            if (jumpButton.isDown || w.isDown || cursors.up.isDown)
-            {
-                if (player.body.onFloor())
-                    player.body.velocity.y = -170;
-            }
+            
+        function update(){
+            
         }
-        
+            
     </script>
 </body>
 </html>
