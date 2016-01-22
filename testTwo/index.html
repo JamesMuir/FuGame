@@ -15,10 +15,10 @@
         var game = new Phaser.Game(960, 640, Phaser.AUTO, '', { preload: preload, create: create, update: update });
         
         function preload() {
-            game.load.tilemap('tilemap', 'assets/testMapTwo.json', null, Phaser.Tilemap.TILED_JSON)
+            game.load.tilemap('tilemap', 'assets/testMapTwo.json', null, Phaser.Tilemap.TILED_JSON);
             game.load.image('tileset', 'assets/tilesetMkI.png');
             game.load.spritesheet('player', 'assets/playerSpriteTwo.png', 32, 64);
-        }
+        };
         
         var map;
         var layer;

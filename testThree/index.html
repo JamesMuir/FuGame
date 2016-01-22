@@ -33,11 +33,11 @@
             // Create spiles
             spikes = game.add.sprite(200,400, "spikes");
             
-            game.physics.p2.enable(spikes, true);
+            game.physics.p2.enable([spikes], false);
             
             spikes.body.clearShapes();
             
-            spikes.body.loadPolygon("spikes_physics", "spiles");
+            spikes.body.loadPolygon("spikes_physics", "spikes");
         }
             
         function update(){
