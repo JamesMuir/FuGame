@@ -3,7 +3,7 @@ var Main = function(game) {
 };
 
 Main.prototype = {
-
+    // Function that creates everything when the game starts up
 	create: function() {
         // Sets background color
         this.game.stage.backgroundColor = "#333333";
@@ -17,8 +17,13 @@ Main.prototype = {
         // Creates collision groups 
         // TODO: Figure out what and how exactly this works
         this.playerCollisionGroup = this.game.physics.p2.createCollisionGroup();
+        
+        
 	},
 
+    // Function that runs repeatedly.
+    // Used to control movement
+    // Used to control collision 
 	update: function() {
 	  
 	},
